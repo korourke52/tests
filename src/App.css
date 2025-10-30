@@ -1,0 +1,128 @@
+.app {
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  background: linear-gradient(135deg, #F2EDE3 0%, #FFFFFF 100%);
+}
+
+.hero-content {
+  max-width: 800px;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 56px;
+  margin-bottom: 24px;
+  color: var(--color-text-primary);
+}
+
+.hero-subtitle {
+  font-size: 20px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Skills Section */
+.skills {
+  padding: 96px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 64px;
+  color: var(--color-text-primary);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+}
+
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.card-emoji {
+  font-size: 48px;
+  margin-bottom: 24px;
+}
+
+.card-title {
+  font-size: 24px;
+  margin-bottom: 12px;
+  color: var(--color-text-primary);
+}
+
+.card-description {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* CTA Section */
+.cta {
+  padding: 96px 24px;
+  text-align: center;
+  background: var(--color-neutral-100);
+}
+
+.cta-title {
+  font-size: 40px;
+  margin-bottom: 16px;
+  color: var(--color-text-primary);
+}
+
+.cta-text {
+  font-size: 18px;
+  color: var(--color-text-secondary);
+  margin-bottom: 32px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 40px;
+  }
+  
+  .hero-subtitle {
+    font-size: 18px;
+  }
+  
+  .section-title,
+  .cta-title {
+    font-size: 32px;
+  }
+  
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
