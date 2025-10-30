@@ -1,10 +1,9 @@
 // ChatMessage.js - Chat bubble with optional tail and feedback
-import React, { useState, useId } from 'react';
+import React, { useState } from 'react';
 import { theme } from '../theme';
 
-function ChatMessage({ message, isUser = false, showFeedback = false, avatar, avatarPulse = false }) {
+function ChatMessage({ message, isUser = false, showFeedback = false, avatar }) {
   const [feedback, setFeedback] = useState(null);
-  const gradientId = useId();
 
   return (
     <div
@@ -18,34 +17,25 @@ function ChatMessage({ message, isUser = false, showFeedback = false, avatar, av
     >
       {/* Avatar for AI messages */}
       {!isUser && (
-        <div style={{ width: '24px', height: '24px', animation: avatarPulse ? 'pulse 1.2s ease-in-out infinite' : 'none' }}>
-          {avatar ? (
-            avatar
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden
-            >
-              <defs>
-                <radialGradient id={gradientId} cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(12 11.9662) rotate(90) scale(22.0831 28.1813)">
-                  <stop offset="0.11" stopColor="#FFCF26" />
-                  <stop offset="0.609577" stopColor="#F0A378" />
-                  <stop offset="1" stopColor="#2D150D" />
-                </radialGradient>
-              </defs>
-              <circle cx="12" cy="12" r="12" fill={`url(#${gradientId})`} />
-            </svg>
-          )}
+        <div
+          style={{
+            width: '24px',
+            height: '24px',
+            borderRadius: '50%',
+            backgroundColor: '#FFC107',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '14px',
+          }}
+        >
+          {avatar || '●'}
         </div>
       )}
 
       {/* Message Bubble */}
       {isUser ? (
-        // User message - no tail
+        // User message - with background and tail
         <div
           style={{
             backgroundColor: theme.colors.neutral[200],
@@ -66,6 +56,24 @@ function ChatMessage({ message, isUser = false, showFeedback = false, avatar, av
           >
             {message}
           </p>
+          {/* Speech bubble tail - flipped and tucked under edge */}
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            style={{
+              position: 'absolute',
+              bottom: '0',
+              right: '-6px',
+              transform: 'scale(-1, -1)',
+              transformOrigin: 'center',
+              transformBox: 'fill-box',
+              pointerEvents: 'none',
+              display: 'block',
+            }}
+          >
+            <path d="M 0 0 L 20 0 L 0 20 Z" fill={theme.colors.neutral[200]} />
+          </svg>
         </div>
       ) : (
         // AI message - plain text block
@@ -118,7 +126,7 @@ function ChatMessage({ message, isUser = false, showFeedback = false, avatar, av
             onClick={() => setFeedback('down')}
             style={{
               backgroundColor: feedback === 'down' ? theme.colors.surface.raised : 'transparent',
-              border: '1px solid ' + (feedback === 'down') ? theme.colors.border.default : 'transparent',
+              border: '1px solid ' + (feedback === 'down' ? theme.colors.border.default : 'transparent'),
               cursor: 'pointer',
               padding: theme.spacing[2],
               borderRadius: theme.radius.sm,
